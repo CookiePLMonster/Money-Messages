@@ -3,7 +3,7 @@
 #include "MoneyMessages.h"
 
 static CRGBA			MoneyMessagesColours[5];
-static unsigned char	CurrentPickedColour;
+static uint8_t			CurrentPickedColour;
 
 // Functions replace GTA III sprintf calls, which formatted later unused money messages
 void RegisterMoneyMessageIII_Pickup(char* str, const char* format, CPickupIII* arg)
@@ -12,14 +12,14 @@ void RegisterMoneyMessageIII_Pickup(char* str, const char* format, CPickupIII* a
 	CMoneyMessages::RegisterOne(arg->vecPos + CVector(0.0f, 0.0f, 1.0f), str, 0, 255, 0, 0.5f, 0.5f);
 }
 
-void RegisterMoneyMessageIII_VehicleExplosion(char* str, CPlaceableIII* pVehicle, unsigned int value)
+void RegisterMoneyMessageIII_VehicleExplosion(char* str, CPlaceableIII* pVehicle, uint32_t value)
 {
 	sprintf(str, "$%d", value);
 	CMoneyMessages::RegisterOne(*pVehicle->m_Matrix.GetPos() + CVector(0.0f, 0.0f, 2.0f), str, MoneyMessagesColours[CurrentPickedColour].r, MoneyMessagesColours[CurrentPickedColour].g, MoneyMessagesColours[CurrentPickedColour].b, 2.0f, 0.75f);
 	CurrentPickedColour = ++CurrentPickedColour % 5;
 }
 
-void RegisterMoneyMessageIII_VehicleDamage(char* str, CPlaceableIII* pVehicle, unsigned int value)
+void RegisterMoneyMessageIII_VehicleDamage(char* str, CPlaceableIII* pVehicle, uint32_t value)
 {
 	sprintf(str, "$%d", value);
 	CMoneyMessages::RegisterOne(*pVehicle->m_Matrix.GetPos() + CVector(0.0f, 0.0f, 1.5f), str, MoneyMessagesColours[CurrentPickedColour].r, MoneyMessagesColours[CurrentPickedColour].g, MoneyMessagesColours[CurrentPickedColour].b, 1.0f, 0.5f);

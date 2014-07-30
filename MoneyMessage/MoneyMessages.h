@@ -9,7 +9,7 @@
 class CMoneyMessage
 {
 public:
-	signed int						m_nTimeRegistered;
+	int32_t							m_nTimeRegistered;
 	CVector							m_vecPosition;
 	wchar_t							m_aText[16];
 	CRGBA							m_Colour;
@@ -24,7 +24,7 @@ private:
 
 public:
 	// This function wasn't present in GTA III, so it has to be recreated
-	static void						RegisterOne(CVector vecPos, const char* pText, unsigned char bRed, unsigned char bGreen, unsigned char bBlue, float fSize, float fOpacity);
+	static void						RegisterOne(CVector vecPos, const char* pText, uint8_t bRed, uint8_t bGreen, uint8_t bBlue, float fSize, float fOpacity);
 
 };
 

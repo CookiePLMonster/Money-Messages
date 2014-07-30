@@ -7,7 +7,7 @@
 
 #include <windows.h>
 #include <cstdio>
+#include <cstdint>
 
 #include "MemoryMgr.h"
-
 #include "General.h"

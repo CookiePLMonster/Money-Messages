@@ -13,20 +13,20 @@ struct RwMatrix
 {
     /* These are padded to be 16 byte quantities per line */
     RwV3d               right;
-    unsigned int        flags;
+    uint32_t            flags;
     RwV3d               up;
-    unsigned int        pad1;
+    uint32_t            pad1;
     RwV3d               at;
-    unsigned int        pad2;
+    uint32_t            pad2;
     RwV3d               pos;
-    unsigned int        pad3;
+    uint32_t            pad3;
 };
 
 // Generic GTA classes
 class CRGBA
 {
 public:
-	BYTE r, g, b, a;
+	uint8_t r, g, b, a;
 
 	inline CRGBA() {}
 
@@ -34,11 +34,11 @@ public:
 		: r(in.r), g(in.g), b(in.b), a(in.a)
 	{}
 
-	inline CRGBA(const CRGBA& in, BYTE alpha)
+	inline CRGBA(const CRGBA& in, uint8_t alpha)
 		: r(in.r), g(in.g), b(in.b), a(alpha)
 	{}
 
-	inline CRGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255)
+	inline CRGBA(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
 		: r(red), g(green), b(blue), a(alpha)
 	{}
 };
@@ -86,13 +86,13 @@ public:
 class CPickupIII
 {
 public:
-	unsigned char	bPickupType;
+	uint8_t			bPickupType;
 	bool			bRemoved;
-	unsigned short	wPickupQuantity;
+	uint16_t		wPickupQuantity;
 	void*			pObject;
-	signed int		nTimer;
-	short			nModelId;
-	unsigned short	wUniqueId;
+	int32_t			nTimer;
+	int16_t			nModelId;
+	uint16_t		wUniqueId;
 	CVector			vecPos;
 };
 
@@ -100,17 +100,17 @@ public:
 class CPickupVC
 {
 public:
-	CVector			vecPos; 
-	float			fStandProximity; 
-	void*			pObject; 
-	void*			pExtraObject; 
-	unsigned int	dwPickupQuantity;
-	signed int		nTimer; 
-	unsigned short	wMoneySpeed;
-	short			nModelId;
-	unsigned short	wUniqueId;
+	CVector			vecPos;
+	float			fStandProximity;
+	void*			pObject;
+	void*			pExtraObject;
+	uint32_t		dwPickupQuantity;
+	int32_t			nTimer;
+	uint16_t		wMoneySpeed;
+	int16_t			nModelId;
+	uint16_t		wUniqueId;
 	char			szPickupTextKey[8];
-	unsigned char	bPickupType;
+	uint8_t			bPickupType;
 	bool			bRemoved;
 	bool			bEffects;
 };

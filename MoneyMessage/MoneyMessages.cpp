@@ -5,12 +5,12 @@ CMoneyMessage* const	CMoneyMessages::aMoneyMessages = (CMoneyMessage*)0x7268F0;
 
 // GTA global variables
 // We need this one only in this .cpp file, so we can define it there
-signed int&				snTimeInMilliseconds = *(signed int*)0x885B48;
+int32_t&				snTimeInMilliseconds = *(int32_t*)0x885B48;
 
 // This function wasn't present in GTA III, so it has to be recreated
-void CMoneyMessages::RegisterOne(CVector vecPos, const char* pText, unsigned char bRed, unsigned char bGreen, unsigned char bBlue, float fSize, float fOpacity)
+void CMoneyMessages::RegisterOne(CVector vecPos, const char* pText, uint8_t bRed, uint8_t bGreen, uint8_t bBlue, float fSize, float fOpacity)
 {
-	int		nIndex = 0;
+	uint32_t		nIndex = 0;
 	while ( aMoneyMessages[nIndex].m_nTimeRegistered )
 	{
 		++nIndex;
