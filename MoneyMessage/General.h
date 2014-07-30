@@ -4,22 +4,22 @@
 // RenderWare structures
 struct RwV3d
 {
-    float x;   /**< X value */
-    float y;   /**< Y value */
-    float z;   /**< Z value */
+	float x;	/**< X value */
+	float y;	/**< Y value */
+	float z;	/**< Z value */
 };
 
 struct RwMatrix
 {
-    /* These are padded to be 16 byte quantities per line */
-    RwV3d               right;
-    uint32_t            flags;
-    RwV3d               up;
-    uint32_t            pad1;
-    RwV3d               at;
-    uint32_t            pad2;
-    RwV3d               pos;
-    uint32_t            pad3;
+	/* These are padded to be 16 byte quantities per line */
+	RwV3d				right;
+	uint32_t			flags;
+	RwV3d				up;
+	uint32_t			pad1;
+	RwV3d				at;
+	uint32_t			pad2;
+	RwV3d				pos;
+	uint32_t			pad3;
 };
 
 // Generic GTA classes

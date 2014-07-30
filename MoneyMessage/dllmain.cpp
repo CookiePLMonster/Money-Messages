@@ -54,16 +54,16 @@ void Patch_III_10()
 	// Money pickups
 	InjectHook(0x431342, RegisterMoneyMessageIII_Pickup);
 	Nop(0x431333, 4);
-	Patch<BYTE>(0x431337, 0x56);
+	Patch<BYTE>(0x431337, 0x56);	// push esi
 
 	// Vehicle explosions
 	InjectHook(0x4A1678, RegisterMoneyMessageIII_VehicleExplosion);
 	Nop(0x4A166E, 1);
-	Patch<DWORD>(0x4A166F, 0x202474FF);
+	Patch<DWORD>(0x4A166F, 0x202474FF);	// push [esp+20]
 
 	// Vehicle damage
 	Nop(0x52FDCB, 4);
-	Patch<BYTE>(0x52FDCF, 0x55);
+	Patch<BYTE>(0x52FDCF, 0x55);	// push ebp
 	InjectHook(0x52FDD5, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
@@ -77,16 +77,16 @@ void Patch_III_11()
 	// Money pickups
 	InjectHook(0x431342, RegisterMoneyMessageIII_Pickup);
 	Nop(0x431333, 4);
-	Patch<BYTE>(0x431337, 0x56);
+	Patch<BYTE>(0x431337, 0x56);	// push esi
 
 	// Vehicle explosions
 	InjectHook(0x4A1768, RegisterMoneyMessageIII_VehicleExplosion);
 	Nop(0x4A175E, 1);
-	Patch<DWORD>(0x4A175F, 0x202474FF);
+	Patch<DWORD>(0x4A175F, 0x202474FF);	// push [esp+20]
 
 	// Vehicle damage
 	Nop(0x53000B, 4);
-	Patch<BYTE>(0x53000F, 0x55);
+	Patch<BYTE>(0x53000F, 0x55);	// push ebp
 	InjectHook(0x530015, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
@@ -100,16 +100,16 @@ void Patch_III_Steam()
 	// Money pickups
 	InjectHook(0x431342, RegisterMoneyMessageIII_Pickup);
 	Nop(0x431333, 4);
-	Patch<BYTE>(0x431337, 0x56);
+	Patch<BYTE>(0x431337, 0x56);	// push esi
 
 	// Vehicle explosions
 	InjectHook(0x4A16F8, RegisterMoneyMessageIII_VehicleExplosion);
 	Nop(0x4A16EE, 1);
-	Patch<DWORD>(0x4A16EF, 0x202474FF);
+	Patch<DWORD>(0x4A16EF, 0x202474FF);	// push [esp+20]
 
 	// Vehicle damage
 	Nop(0x52FF9B, 4);
-	Patch<BYTE>(0x52FF9F, 0x55);
+	Patch<BYTE>(0x52FF9F, 0x55);	// push ebp
 	InjectHook(0x52FFA5, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
@@ -124,7 +124,7 @@ void Patch_VC_10()
 	// Money pickups
 	InjectHook(0x441399, RegisterMoneyMessageVC_Pickup);
 	Nop(0x44138B, 4);
-	Patch<BYTE>(0x44138E, 0x56);
+	Patch<BYTE>(0x44138E, 0x56);	// push esi
 
 	// Helicopter explosion
 	InjectHook(0x5AD1D7, RegisterMoneyMessage_HeliBlowup);
@@ -137,7 +137,7 @@ void Patch_VC_11()
 	// Money pickups
 	InjectHook(0x441399, RegisterMoneyMessageVC_Pickup);
 	Nop(0x44138B, 4);
-	Patch<BYTE>(0x44138E, 0x56);
+	Patch<BYTE>(0x44138E, 0x56);	// push esi
 
 	// Helicopter explosion
 	InjectHook(0x5AD1F7, RegisterMoneyMessage_HeliBlowup);
@@ -192,7 +192,7 @@ extern "C" BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserve
 		MoneyMessagesColours[3].r = 255;
 		MoneyMessagesColours[3].g = 255;
 		MoneyMessagesColours[3].b = 0;
-			
+
 		// Colour 5 - light blue
 		MoneyMessagesColours[4].r = 0;
 		MoneyMessagesColours[4].g = 200;

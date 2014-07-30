@@ -46,55 +46,6 @@ inline T AddressByVersion(uint32_t III_address10, uint32_t III_address11, uint32
 	}
 }
 
-// Same as above, but for III-only addresses
-template<typename T>
-inline T AddressByVersion_III(uint32_t III_address10, uint32_t III_address11, uint32_t III_addressSteam)
-{
-	static int8_t		bVer = -1;
-
-	if ( bVer == -1 )
-	{
-		if (*(uint32_t*)0x5C1E70 == 0x53E58955) bVer = 0;
-		else if (*(uint32_t*)0x5C2130 == 0x53E58955) bVer = 1;
-		else if (*(uint32_t*)0x5C6FD0 == 0x53E58955) bVer = 2;
-	}
-	switch ( bVer )
-	{
-	case 0:
-		return (T)III_address10;
-	case 1:
-		return (T)III_address11;
-	case 2:
-		return (T)III_addressSteam;
-	default:
-		return (T)nullptr;
-	}
-}
-
-// Same as above, but for VC-only addresses
-template<typename T>
-inline T AddressByVersion_VC(uint32_t VC_address10, uint32_t VC_address11, uint32_t VC_addressSteam)
-{
-	static int8_t		bVer = -1;
-
-	if ( bVer == -1 )
-	{
-		if (*(uint32_t*)0x667BF0 == 0x53E58955) bVer = 3;
-		else if (*(uint32_t*)0x667C40 == 0x53E58955) bVer = 4;
-		else if (*(uint32_t*)0x666BA0 == 0x53E58955) bVer = 5;
-	}
-	switch ( bVer )
-	{
-	case 3:
-		return (T)VC_address10;
-	case 4:
-		return (T)VC_address11;
-	case 5:
-		return (T)VC_addressSteam;
-	default:
-		return (T)nullptr;
-	}
-}
 
 namespace Memory
 {
