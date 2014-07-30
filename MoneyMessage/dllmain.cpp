@@ -101,7 +101,7 @@ void Patch_III_Steam()
 	Patch<DWORD>(0x4A16EF, 0x202474FF);
 
 	// Vehicle damage
-	Nop(0x52FF9E, 4);
+	Nop(0x52FF9B, 4);
 	Patch<BYTE>(0x52FF9F, 0x55);
 	InjectHook(0x52FFA5, RegisterMoneyMessageIII_VehicleDamage);
 
