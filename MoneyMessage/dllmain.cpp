@@ -6,7 +6,7 @@ static CRGBA			MoneyMessagesColours[5];
 static uint8_t			CurrentPickedColour;
 
 // III/VC function pointers
-auto WorldRemove = AddressByVersion<void(*)(void*)>(0x4AE9D0, 0x4AEAC0, 0x4AEA50, 0, 0, 0);
+auto WorldRemove = AddressByVersion<void(*)(void*)>(0x4AE9D0, 0x4AEAC0, 0x4AEA50, 0x4DB310, 0x4DB330, 0x4DB1D0);
 
 
 // Functions replace GTA III sprintf calls, which formatted later unused money messages
@@ -16,23 +16,30 @@ void RegisterMoneyMessageIII_Pickup(char* str, const char* format, CPickupIII* a
 	CMoneyMessages::RegisterOne(arg->vecPos + CVector(0.0f, 0.0f, 1.0f), str, 0, 255, 0, 0.5f, 0.5f);
 }
 
-void RegisterMoneyMessageIII_VehicleExplosion(char* str, CPlaceableIII* pVehicle, uint32_t value)
+void RegisterMoneyMessageIII_VehicleExplosion(char* str, CPlaceable* pVehicle, uint32_t value)
 {
 	sprintf(str, "$%d", value);
 	CMoneyMessages::RegisterOne(*pVehicle->m_Matrix.GetPos() + CVector(0.0f, 0.0f, 2.0f), str, MoneyMessagesColours[CurrentPickedColour].r, MoneyMessagesColours[CurrentPickedColour].g, MoneyMessagesColours[CurrentPickedColour].b, 2.0f, 0.75f);
 	CurrentPickedColour = ++CurrentPickedColour % 5;
 }
 
-void RegisterMoneyMessageIII_VehicleDamage(char* str, CPlaceableIII* pVehicle, uint32_t value)
+void RegisterMoneyMessageIII_VehicleDamage(char* str, CPlaceable* pVehicle, uint32_t value)
 {
 	sprintf(str, "$%d", value);
 	CMoneyMessages::RegisterOne(*pVehicle->m_Matrix.GetPos() + CVector(0.0f, 0.0f, 1.5f), str, MoneyMessagesColours[CurrentPickedColour].r, MoneyMessagesColours[CurrentPickedColour].g, MoneyMessagesColours[CurrentPickedColour].b, 1.0f, 0.5f);
 	CurrentPickedColour = ++CurrentPickedColour % 5;
 }
 
-void RegisterMoneyMessageIII_HeliBlowup(CPlaceableIII* pHeli)
+// Functions replace GTA VC sprintf calls, which formatted later unused money messages
+void RegisterMoneyMessageVC_Pickup(char* str, const char* format, CPickupVC* arg)
 {
-	// You always get $250 for blowing up a heli in III
+	sprintf(str, format, arg->dwPickupQuantity);
+	CMoneyMessages::RegisterOne(arg->vecPos + CVector(0.0f, 0.0f, 1.0f), str, 0, 255, 0, 0.5f, 0.5f);
+}
+
+void RegisterMoneyMessage_HeliBlowup(CPlaceable* pHeli)
+{
+	// You always get $250 for blowing up a heli in III/VC
 	CMoneyMessages::RegisterOne(*pHeli->m_Matrix.GetPos() + CVector(0.0f, 0.0f, 2.5f), "$250", MoneyMessagesColours[CurrentPickedColour].r, MoneyMessagesColours[CurrentPickedColour].g, MoneyMessagesColours[CurrentPickedColour].b, 2.5f, 0.75f);
 	CurrentPickedColour = ++CurrentPickedColour % 5;
 
@@ -60,7 +67,7 @@ void Patch_III_10()
 	InjectHook(0x52FDD5, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
-	InjectHook(0x54A063, RegisterMoneyMessageIII_HeliBlowup);
+	InjectHook(0x54A063, RegisterMoneyMessage_HeliBlowup);
 }
 
 void Patch_III_11()
@@ -83,7 +90,7 @@ void Patch_III_11()
 	InjectHook(0x530015, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
-	InjectHook(0x54A263, RegisterMoneyMessageIII_HeliBlowup);
+	InjectHook(0x54A263, RegisterMoneyMessage_HeliBlowup);
 }
 
 void Patch_III_Steam()
@@ -106,7 +113,7 @@ void Patch_III_Steam()
 	InjectHook(0x52FFA5, RegisterMoneyMessageIII_VehicleDamage);
 
 	// Helicopter explosion
-	InjectHook(0x54A213, RegisterMoneyMessageIII_HeliBlowup);
+	InjectHook(0x54A213, RegisterMoneyMessage_HeliBlowup);
 }
 
 
@@ -114,16 +121,39 @@ void Patch_VC_10()
 {
 	using namespace MemoryVP;
 
+	// Money pickups
+	InjectHook(0x441399, RegisterMoneyMessageVC_Pickup);
+	Nop(0x44138B, 4);
+	Patch<BYTE>(0x44138E, 0x56);
+
+	// Helicopter explosion
+	InjectHook(0x5AD1D7, RegisterMoneyMessage_HeliBlowup);
 }
 
 void Patch_VC_11()
 {
 	using namespace MemoryVP;
+
+	// Money pickups
+	InjectHook(0x441399, RegisterMoneyMessageVC_Pickup);
+	Nop(0x44138B, 4);
+	Patch<BYTE>(0x44138E, 0x56);
+
+	// Helicopter explosion
+	InjectHook(0x5AD1F7, RegisterMoneyMessage_HeliBlowup);
 }
 
 void Patch_VC_Steam()
 {
 	using namespace MemoryVP;
+
+	// Money pickups
+	InjectHook(0x441309, RegisterMoneyMessageVC_Pickup);
+	Nop(0x4412FB, 4);
+	Patch<BYTE>(0x4412FE, 0x56);
+
+	// Helicopter explosion
+	InjectHook(0x5AD007, RegisterMoneyMessage_HeliBlowup);
 }
 
 // extern "C" is not really needed there - it's only added for MinGW's sake

@@ -24,6 +24,7 @@ private:
 
 public:
 	// This function wasn't present in GTA III, so it has to be recreated
+	// But since we have it in the ASI now, VC will be able to use it too ;)
 	static void						RegisterOne(CVector vecPos, const char* pText, uint8_t bRed, uint8_t bGreen, uint8_t bBlue, float fSize, float fOpacity);
 
 };

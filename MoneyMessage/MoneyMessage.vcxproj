@@ -56,7 +56,7 @@
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(TargetPath)" "D:\gry\Steam\steamapps\common\Grand Theft Auto 3\MoneyMessages.asi"</Command>
+      <Command>copy /y "$(TargetPath)" "D:\gry\Steam\steamapps\common\Grand Theft Auto Vice City\MoneyMessages.asi"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +80,7 @@
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(TargetPath)" "D:\gry\Steam\steamapps\common\Grand Theft Auto 3\MoneyMessages.asi"</Command>
+      <Command>copy /y "$(TargetPath)" "D:\gry\Steam\steamapps\common\Grand Theft Auto Vice City\MoneyMessages.asi"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

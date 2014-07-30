@@ -115,18 +115,16 @@ public:
 	bool			bEffects;
 };
 
-class CPlaceableIII
+class CPlaceable
 {
 public:
 	CMatrix			m_Matrix;
 
 public:
 	// Just to line up the offsets
-	virtual			~CPlaceableIII()
+	virtual			~CPlaceable()
 	{}
 };
-
-typedef CPlaceableIII		CPlaceableVC;
 
 static_assert(sizeof(CPickupIII) == 0x1C, "Wrong class size: CPickupIII");
 static_assert(sizeof(CPickupVC) == 0x34, "Wrong class size: CPickupVC");
